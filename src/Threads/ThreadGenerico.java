@@ -96,7 +96,6 @@ public class ThreadGenerico extends Thread{
 					this.inicio++;
 				}
 				break;
-				
 		}
 	}
 }

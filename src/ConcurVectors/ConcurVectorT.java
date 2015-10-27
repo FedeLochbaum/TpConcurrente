@@ -81,11 +81,17 @@ public class ConcurVectorT {
 	}
 	
 	public double norm() {
-		return 2; //falta
+		//no estoy seguro si es concurrente,deberia porque lo instancio como un concurVEctorT
+		ConcurVectorT aux = new ConcurVectorT(dimension(),threads,load);
+		aux.assign(vector);
+		aux.mul(vector);
+		return Math.sqrt(aux.sum());
 	}
 		
 	public void normalize() {
-		//falta
+		ConcurVector aux = new ConcurVector(dimension()); //esto es concurrente(creo)
+		aux.set(norm());
+		div(aux);
 	}
 	
 	public void max(ConcurVector v) {
