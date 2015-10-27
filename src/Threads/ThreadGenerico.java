@@ -83,6 +83,20 @@ public class ThreadGenerico extends Thread{
 					vector1.set(inicio,elementv1-elementv2);
 					this.inicio++;
 			}
+			break;
+			case Max :
+				while (inicio > fin){
+					vector1.set(inicio, Math.max(vector1.get(inicio), vector2.get(inicio)));
+					this.inicio++;
+				}
+				break;
+			case Min :
+				while (inicio > fin){
+					vector1.set(inicio, Math.min(vector1.get(inicio), vector2.get(inicio)));
+					this.inicio++;
+				}
+				break;
+				
 		}
 	}
 }

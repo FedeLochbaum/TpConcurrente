@@ -89,11 +89,13 @@ public class ConcurVectorT {
 	}
 	
 	public void max(ConcurVector v) {
-		//falta
+		Operacion op = Operacion.Max;
+		this.aplicarOpConThread(op, v, 0, null);
 	}
 	
 	public void min(ConcurVector v) {
-		//falta
+		Operacion op = Operacion.Min;
+		this.aplicarOpConThread(op, v, 0, null);
 	}
 	
 	public List<Integer> calcularDivisionDeSubtareas()

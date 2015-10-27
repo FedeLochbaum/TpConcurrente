@@ -2,5 +2,5 @@ package Threads;
 
 public enum Operacion {
 	Abs , Add , Assing , AssingWithMask , Div ,
-	Mul , Set  , Sub 
+	Mul , Set  , Sub  , Max , Min
 }
