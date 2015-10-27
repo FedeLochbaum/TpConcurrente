@@ -77,7 +77,10 @@ public class ConcurVectorT {
 	}
 	
 	public double prod(ConcurVector v) {
-		return 2; //falta
+		ConcurVectorT aux = new ConcurVectorT(dimension(),threads,load);//mientras las ops sean concurrentes es concurrente
+		aux.assign(vector);
+		aux.mul(v);
+		return aux.sum();
 	}
 	
 	public double norm() {
