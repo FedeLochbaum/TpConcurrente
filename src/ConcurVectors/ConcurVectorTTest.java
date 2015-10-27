@@ -35,8 +35,8 @@ public void setUp(){
 @Test
 public void dimensionTest()
 {
-	int esperado = 5;
-	int Aevaluar = vector1.dimension();
+	Integer esperado = 5;
+	Integer Aevaluar = vector1.dimension();
 	assertEquals(esperado,Aevaluar);
 }
 
@@ -45,9 +45,9 @@ public void dimensionTest()
 public void setAndGetTest()
 {
 	vector1.set(1,4);
-	double esperado = 4;
-	double Aevaluar = vector1.get(1);
-	assertTrue(esperado==Aevaluar);
+	Double esperado = 4d;
+	Double Aevaluar = vector1.get(1);
+	assertEquals(esperado,Aevaluar);
 }
 @Test
 public void getTest()
@@ -55,9 +55,9 @@ public void getTest()
 	vector1.set(0);
 	for (int i = 0; i < vector1.dimension(); ++i)
 	{
-		double esperado = 0;
-		double Aesperar = vector1.get(i);
-		assertTrue(esperado==Aesperar);
+		Double esperado = 0d;
+		Double Aesperar = vector1.get(i);
+		assertEquals(esperado,Aesperar);
 	}	
 }
 
@@ -68,9 +68,9 @@ public void assignTest()
 	vector1.assign(vector2);
 	for (int i = 0; i < vector1.dimension(); ++i)
 	{
-		double esperado = 10;
-		double Aesperar = vector1.get(i);
-		assertTrue(esperado==Aesperar);
+		Double esperado = 10d;
+		Double Aesperar = vector1.get(i);
+		assertEquals(esperado,Aesperar);
 	}	
 }
 
@@ -81,17 +81,17 @@ public void assignWithMask()
 
 	vector1.assign(mascara,vector2);
 	
-	double pos1 = vector1.get(0);
-	double pos2 = vector1.get(1);
-	double pos3 = vector1.get(2);
-	double pos4 = vector1.get(3);
-	double pos5 = vector1.get(4);
+	Double pos1 = vector1.get(0);
+	Double pos2 = vector1.get(1);
+	Double pos3 = vector1.get(2);
+	Double pos4 = vector1.get(3);
+	Double pos5 = vector1.get(4);
 	
-	assertTrue(pos1==10);
-	assertTrue(pos2 == 10);
-	assertTrue(pos3 == 3);
-	assertTrue(pos4 == 10);
-	assertTrue(pos5 == 3);
+	assertEquals(pos1,Double.valueOf(10));
+	assertEquals(pos2,Double.valueOf(10));
+	assertEquals(pos3,Double.valueOf(3));
+	assertEquals(pos4,Double.valueOf(10));
+	assertEquals(pos5,Double.valueOf(3));
 	
 }
 
@@ -102,17 +102,18 @@ public void absTest()
 	
 	vector1.abs();
 	
-	double pos1 = vector1.get(0);
-	double pos2 = vector1.get(1);
-	double pos3 = vector1.get(2);
-	double pos4 = vector1.get(3);
-	double pos5 = vector1.get(4);
+	Double pos1 = vector1.get(0);
+	Double pos2 = vector1.get(1);
+	Double pos3 = vector1.get(2);
+	Double pos4 = vector1.get(3);
+	Double pos5 = vector1.get(4);
 	
-	assertTrue(pos1==2);
-	assertTrue(pos2 == 4);
-	assertTrue(pos3 == 4);
-	assertTrue(pos4 == 40);
-	assertTrue(pos5 == 1);	
+	assertEquals(pos1,Double.valueOf(2));
+	assertEquals(pos2,Double.valueOf(4));
+	assertEquals(pos3,Double.valueOf(4));
+	assertEquals(pos4,Double.valueOf(40));
+	assertEquals(pos5,Double.valueOf(1));
+	
 }
 
 @Test
@@ -120,17 +121,17 @@ public void addTest()
 {
 	vector1.add(vector2);
 	
-	double pos1 = vector1.get(0);
-	double pos2 = vector1.get(1);
-	double pos3 = vector1.get(2);
-	double pos4 = vector1.get(3);
-	double pos5 = vector1.get(4);
+	Double pos1 = vector1.get(0);
+	Double pos2 = vector1.get(1);
+	Double pos3 = vector1.get(2);
+	Double pos4 = vector1.get(3);
+	Double pos5 = vector1.get(4);
 	
-	assertTrue(pos1==12);
-	assertTrue(pos2 == 14);
-	assertTrue(pos3 == 6);
-	assertTrue(pos4 == 50);
-	assertTrue(pos5 == 9);
+	assertEquals(pos1,Double.valueOf(12));
+	assertEquals(pos2,Double.valueOf(14));
+	assertEquals(pos3,Double.valueOf(6));
+	assertEquals(pos4,Double.valueOf(50));
+	assertEquals(pos5,Double.valueOf(9));
 }
 
 @Test
@@ -138,17 +139,17 @@ public void subTest()
 {
 	vector1.sub(vector2);
 	
-	double pos1 = vector1.get(0);
-	double pos2 = vector1.get(1);
-	double pos3 = vector1.get(2);
-	double pos4 = vector1.get(3);
-	double pos5 = vector1.get(4);
-	
-	assertTrue(pos1==-8);
-	assertTrue(pos2 == -6);
-	assertTrue(pos3 == -14);
-	assertTrue(pos4 == 30);
-	assertTrue(pos5 == -11);
+	Double pos1 = vector1.get(0);
+	Double pos2 = vector1.get(1);
+	Double pos3 = vector1.get(2);
+	Double pos4 = vector1.get(3);
+	Double pos5 = vector1.get(4);
+
+	assertEquals(pos1,Double.valueOf(-8));
+	assertEquals(pos2,Double.valueOf(-6));
+	assertEquals(pos3,Double.valueOf(-14));
+	assertEquals(pos4,Double.valueOf(30));
+	assertEquals(pos5,Double.valueOf(-11));
 }
 
 @Test
@@ -157,17 +158,18 @@ public void mulTest()
 
 	vector1.mul(vector2);
 	
-	double pos1 = vector1.get(0);
-	double pos2 = vector1.get(1);
-	double pos3 = vector1.get(2);
-	double pos4 = vector1.get(3);
-	double pos5 = vector1.get(4);
+	Double pos1 = vector1.get(0);
+	Double pos2 = vector1.get(1);
+	Double pos3 = vector1.get(2);
+	Double pos4 = vector1.get(3);
+	Double pos5 = vector1.get(4);
 	
-	assertTrue(pos1==20);
-	assertTrue(pos2 == 40);
-	assertTrue(pos3 == -40);
-	assertTrue(pos4 == 400);
-	assertTrue(pos5 == -10);
+	assertEquals(pos1,Double.valueOf(20));
+	assertEquals(pos2,Double.valueOf(40));
+	assertEquals(pos3,Double.valueOf(-40));
+	assertEquals(pos4,Double.valueOf(400));
+	assertEquals(pos5,Double.valueOf(-10));
+
 }
 
 @Test
@@ -175,17 +177,18 @@ public void divTest()
 {
 	vector1.div(vector2);
 	
-	double pos1 = vector1.get(0);
-	double pos2 = vector1.get(1);
-	double pos3 = vector1.get(2);
-	double pos4 = vector1.get(3);
-	double pos5 = vector1.get(4);
+	Double pos1 = vector1.get(0);
+	Double pos2 = vector1.get(1);
+	Double pos3 = vector1.get(2);
+	Double pos4 = vector1.get(3);
+	Double pos5 = vector1.get(4);
 	
-	assertTrue(pos1==0.2);
-	assertTrue(pos2 == 0.4);
-	assertTrue(pos3 == -0.4);
-	assertTrue(pos4 == 4);
-	assertTrue(pos5 == -0.1);
+	assertEquals(pos1,Double.valueOf(0.2));
+	assertEquals(pos2,Double.valueOf(0.4));
+	assertEquals(pos3,Double.valueOf(-0.4));
+	assertEquals(pos4,Double.valueOf(4));
+	assertEquals(pos5,Double.valueOf(-0.1));
+
 }
 
 }

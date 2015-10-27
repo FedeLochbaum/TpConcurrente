@@ -35,7 +35,8 @@ public class ConcurVectorT {
 			int fin = inicio + i;
 			ThreadGenerico thread = new ThreadGenerico(inicio,fin,this.vector,opEnum,vector2,setElem,mask);
 			thread.start();
-			inicio = i;
+			//inicio = i;
+			inicio=fin;
 		}
 	}
 	//para no tener que castear el double, cuando no se usa.. en ves de null se pone 0 .
@@ -115,12 +116,21 @@ public class ConcurVectorT {
 		int resto = cantElem % cantThread;
 		List<Integer> resultado = new ArrayList<Integer>();
 		
-		for(int i=0; i!=(cantThread-1); i++){ resultado.add(promedio);}
+		for(int i=0; i<(cantThread); i++){ 
+			if(resto>0){
+				resultado.add(promedio+1);
+				resto--;
+			}
+			else{
+			resultado.add(promedio);
+			}
+		}
 		
-		if (resto <= this.load)
+		
+		/*if (resto > this.load)
 			resultado.add(resto);
 		else{
-			resultado.add(promedio);
+			//resultado.add(promedio);
 			if(resto <= cantThread)
 			{
 				for(int i=0; i!=resto; i++){
@@ -128,7 +138,7 @@ public class ConcurVectorT {
 				}
 			}
 			//nose.. si se puede llegar a esto(else)
-		}
+		}*/
 		return resultado;	
 	}
 	
