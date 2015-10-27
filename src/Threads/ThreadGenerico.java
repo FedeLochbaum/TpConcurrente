@@ -10,7 +10,7 @@ public class ThreadGenerico extends Thread{
 	private Operacion opEnum;
 	private ConcurVector vector2;
 	private double element;
-	private ConcurVector mask; //la idea seria.. poder pasarle null si no es una op que la use
+	private ConcurVector mask;
 	
 	public ThreadGenerico(int inicio,int fin,ConcurVector vector1,Operacion opEnum,ConcurVector vector2,double element,ConcurVector mask)
 	{

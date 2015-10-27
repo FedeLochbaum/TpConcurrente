@@ -33,7 +33,7 @@ public class ConcurVectorT {
 		for (int i : list)
 		{
 			int fin = inicio + i;
-			ThreadGenerico thread = new ThreadGenerico(inicio,fin,this.vector,opEnum,vector2,setElem,mask);//elements esta mal.
+			ThreadGenerico thread = new ThreadGenerico(inicio,fin,this.vector,opEnum,vector2,setElem,mask);
 			thread.start();
 			inicio = i;
 		}
@@ -70,6 +70,30 @@ public class ConcurVectorT {
 	public void div(ConcurVector v) {
 		Operacion op = Operacion.Div;
 		this.aplicarOpConThread(op, v,0, null);
+	}
+	
+	public double sum() {
+		return 2 ; //falta
+	}
+	
+	public double prod(ConcurVector v) {
+		return 2; //falta
+	}
+	
+	public double norm() {
+		return 2; //falta
+	}
+		
+	public void normalize() {
+		//falta
+	}
+	
+	public void max(ConcurVector v) {
+		//falta
+	}
+	
+	public void min(ConcurVector v) {
+		//falta
 	}
 	
 	public List<Integer> calcularDivisionDeSubtareas()
