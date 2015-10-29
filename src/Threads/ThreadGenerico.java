@@ -35,7 +35,6 @@ public class ThreadGenerico extends Thread{
 					vector1.set(inicio,e);
 					this.inicio++;
 					}
-				concurVectorT.actualizar();
 				break;	
 			case Add :
 				while (inicio < fin){
@@ -44,7 +43,6 @@ public class ThreadGenerico extends Thread{
 					vector1.set(inicio,elementv1+elementv2);
 					this.inicio++;
 				}
-				concurVectorT.actualizar();
 				break;
 			case Assing :
 				while (inicio < fin){
@@ -52,7 +50,6 @@ public class ThreadGenerico extends Thread{
 					vector1.set(inicio,elem);
 					this.inicio++;
 				}
-				concurVectorT.actualizar();
 				break;
 			case AssingWithMask :
 				while (inicio < fin){
@@ -64,7 +61,6 @@ public class ThreadGenerico extends Thread{
 					}	
 					this.inicio++;
 				}
-				concurVectorT.actualizar();
 				break;
 			case Div :
 				while (inicio < fin){
@@ -73,7 +69,6 @@ public class ThreadGenerico extends Thread{
 					vector1.set(inicio,elementv1/elementv2);
 					this.inicio++;
 				}
-				concurVectorT.actualizar();
 				break;
 			case Mul :
 				while (inicio < fin){
@@ -82,14 +77,12 @@ public class ThreadGenerico extends Thread{
 					vector1.set(inicio,elementv1*elementv2);
 					this.inicio++;
 				}
-				concurVectorT.actualizar();
 				break;
 			case Set :
 				while (inicio < fin){
 					vector1.set(inicio,element);
 					this.inicio++;
 				}
-				concurVectorT.actualizar();
 				break;
 			case Sub :
 				while (inicio < fin){
@@ -98,22 +91,20 @@ public class ThreadGenerico extends Thread{
 					vector1.set(inicio,elementv1-elementv2);
 					this.inicio++;
 				}
-				concurVectorT.actualizar();
 				break;
 			case Max :
 				while (inicio < fin){
 					vector1.set(inicio, Math.max(vector1.get(inicio), vector2.get(inicio)));
 					this.inicio++;
 				}
-				concurVectorT.actualizar();
 				break;
 			case Min :
 				while (inicio < fin){
 					vector1.set(inicio, Math.min(vector1.get(inicio), vector2.get(inicio)));
 					this.inicio++;
 				}
-				concurVectorT.actualizar();
 				break;
 		}
+		concurVectorT.actualizar();
 	}
 }

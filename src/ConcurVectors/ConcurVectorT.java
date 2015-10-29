@@ -19,6 +19,7 @@ public class ConcurVectorT {
 		this.load = load;
 		this.vector = new ConcurVector(dimension);
 		this.cantidadDeThreadFinalizado = 0;
+		
 	}
 
 	public int dimension() { return vector.dimension();}
