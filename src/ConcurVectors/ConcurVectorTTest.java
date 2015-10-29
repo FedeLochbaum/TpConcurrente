@@ -190,5 +190,92 @@ public void divTest()
 	assertEquals(pos5,Double.valueOf(-0.1));
 
 }
+/*
+@Test
+public void sumTest()
+{
+	double aEvaluar = vector1.sum();
+	
+	double esperado = 41;
+	
+	assertTrue(esperado == aEvaluar);
+}
+
+@Test
+public void prodTest()
+{
+	double aEvaluar = vector1.prod(vector2);
+	
+	double esperado = 410;
+	
+	assertTrue(esperado == aEvaluar);
+	
+	
+}
+
+@Test
+public void normTest()
+{
+	double aEvaluar = vector1.norm();
+
+	double esperado = 40.45985664828782;
+	
+	assertTrue(esperado == aEvaluar);
+}
+
+@Test
+public void normalizeTest()
+{
+	vector1.normalize();
+	
+	double pos1 = vector1.get(0);
+	double pos2 = vector1.get(1);
+	double pos3 = vector1.get(2);
+	double pos4 = vector1.get(3);
+	double pos5 = vector1.get(4);
+	
+	assertTrue(pos1==0.04943171245972855);
+	assertTrue(pos2 == 0.0988634249194571);
+	assertTrue(pos3 == -0.0988634249194571);
+	assertTrue(pos4 == 0.988634249194571);
+	assertTrue(pos5 == -0.024715856229864275);
+}
+*/
+@Test
+public void maxTest()
+{
+	vector1.max(vector2);
+	
+	double pos1 = vector1.get(0);
+	double pos2 = vector1.get(1);
+	double pos3 = vector1.get(2);
+	double pos4 = vector1.get(3);
+	double pos5 = vector1.get(4);
+	
+	assertTrue(pos1==10);
+	assertTrue(pos2 == 10);
+	assertTrue(pos3 == 10);
+	assertTrue(pos4 == 40);
+	assertTrue(pos5 == 10);
+}
+
+@Test
+public void minTest()
+{
+	vector1.min(vector2);
+	
+	double pos1 = vector1.get(0);
+	double pos2 = vector1.get(1);
+	double pos3 = vector1.get(2);
+	double pos4 = vector1.get(3);
+	double pos5 = vector1.get(4);
+	
+	assertTrue(pos1==2);
+	assertTrue(pos2 == 4);
+	assertTrue(pos3 == -4);
+	assertTrue(pos4 == 10);
+	assertTrue(pos5 == -1);
+}
+
 
 }
