@@ -49,7 +49,7 @@ public class ConcurVector {
 	/** Copies the values from another vector into this vector.
 	 * @param v, a vector from which values are to be copied.
 	 * @precondition dimension() == v.dimension(). */
-	public synchronized void assign(ConcurVector v) {
+	public  void assign(ConcurVector v) {
 		for (int i = 0; i < dimension(); ++i)
 			set(i, v.get(i));
 	}
@@ -60,7 +60,7 @@ public class ConcurVector {
 	 * @param mask, a vector of conditions that indicate whether an element has to be copied or not.
 	 * @param v, a vector from which values are to be copied.
 	 * @precondition dimension() == mask.dimension() && dimension() == v.dimension(). */
-	public synchronized void assign(ConcurVector mask, ConcurVector v) {
+	public  void assign(ConcurVector mask, ConcurVector v) {
 		for (int i = 0; i < dimension(); ++i)
 			if (mask.get(i) >= 0)
 				set(i, v.get(i));
@@ -68,7 +68,7 @@ public class ConcurVector {
 	
 	
 	/** Applies the absolute value operation to every element in this vector. */
-	public synchronized void abs() {
+	public  void abs() {
 		for (int i = 0; i < dimension(); ++i)
 			set(i, Math.abs(get(i)));
 	}
@@ -77,7 +77,7 @@ public class ConcurVector {
 	/** Adds the elements of this vector with the values of another (element-wise).
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
-	public synchronized void add(ConcurVector v) {
+	public  void add(ConcurVector v) {
 		for (int i = 0; i < dimension(); ++i)
 			set(i, get(i) + v.get(i));
 	}
@@ -86,7 +86,7 @@ public class ConcurVector {
 	/** Subtracts from the elements of this vector the values of another (element-wise).
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
-	public synchronized void sub(ConcurVector v) {
+	public  void sub(ConcurVector v) {
 		for (int i = 0; i < dimension(); ++i)
 			set(i, get(i) - v.get(i));
 	}
@@ -95,7 +95,7 @@ public class ConcurVector {
 	/** Multiplies the elements of this vector by the values of another (element-wise).
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
-	public synchronized void mul(ConcurVector v) {
+	public  void mul(ConcurVector v) {
 		for (int i = 0; i < dimension(); ++i)
 			set(i, get(i) * v.get(i));
 	}
@@ -104,14 +104,14 @@ public class ConcurVector {
 	/** Divides the elements of this vector by the values of another (element-wise).
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
-	public synchronized void div(ConcurVector v) {
+	public  void div(ConcurVector v) {
 		for (int i = 0; i < dimension(); ++i)
 			set(i, get(i) / v.get(i));
 	}
 	
 	
 	/** Returns the sum of all the elements in this vector. */
-	public synchronized double sum() {
+	public  double sum() {
 		double result = 0;
 		for (int i = 0; i < dimension(); ++i)
 			result += get(i);
@@ -122,7 +122,7 @@ public class ConcurVector {
 	/** Returns the dot product between two vectors (this and v).
 	 * @param v, second operand of the dot product operation.
 	 * @precondition dimension() == v.dimension(). */
-	public synchronized double prod(ConcurVector v) {
+	public  double prod(ConcurVector v) {
 		ConcurVector aux = new ConcurVector(dimension());
 		aux.assign(this);
 		aux.mul(v);
@@ -131,7 +131,7 @@ public class ConcurVector {
 	
 	
 	/** Returns the norm of this vector. */
-	public synchronized double norm() {
+	public  double norm() {
 		ConcurVector aux = new ConcurVector(dimension());
 		aux.assign(this);
 		aux.mul(this);
@@ -140,7 +140,7 @@ public class ConcurVector {
 	
 	
 	/** Normalizes this vector, converting it into a unit vector. */
-	public synchronized void normalize() {
+	public  void normalize() {
 		ConcurVector aux = new ConcurVector(dimension());
 		aux.set(this.norm());
 		div(aux);
@@ -150,7 +150,7 @@ public class ConcurVector {
 	/** Applies the max operation element-wise.
 	 * @param v, a vector with the second operands for max.
 	 * @precondition dimension == v.dimension(). */
-	public synchronized void max(ConcurVector v) {
+	public  void max(ConcurVector v) {
 		for (int i = 0; i < dimension(); ++i)
 			set(i, Math.max(get(i), v.get(i)));
 	}
@@ -159,7 +159,7 @@ public class ConcurVector {
 	/** Applies the min operation element-wise.
 	 * @param v, a vector with the second operands for min.
 	 * @precondition dimension == v.dimension(). */
-	public synchronized void min(ConcurVector v) {
+	public  void min(ConcurVector v) {
 		for (int i = 0; i < dimension(); ++i)
 			set(i, Math.min(get(i), v.get(i)));
 	}

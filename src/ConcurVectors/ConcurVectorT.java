@@ -40,75 +40,74 @@ public class ConcurVectorT {
 		}
 	}
 	//para no tener que castear el double, cuando no se usa.. en ves de null se pone 0 .
-	public void set(double d) {
+	public synchronized void set(double d) {
 		Operacion op = Operacion.Set;
 		this.aplicarOpConThread(op,null, d, null);
 	}
-	public void assign(ConcurVector v) {
+	public synchronized void assign(ConcurVector v) {
 		Operacion op = Operacion.Assing;
 		this.aplicarOpConThread(op, v,0, null);
-	}
-	public void assign(ConcurVector mask, ConcurVector v) {
+		}
+	public synchronized void assign(ConcurVector mask, ConcurVector v) {
 		Operacion op = Operacion.AssingWithMask;
 		this.aplicarOpConThread(op, v,0, mask);
 	}
-	public void abs() {
+	public synchronized void abs() {
 		Operacion op = Operacion.Abs;
 		this.aplicarOpConThread(op, null, 0, null);
 	}
-	public void add(ConcurVector v) {
+	public synchronized void add(ConcurVector v) {
 		Operacion op = Operacion.Add;
 		this.aplicarOpConThread(op, v, 0, null);
 	}
-	public void sub(ConcurVector v) {
+	public synchronized void sub(ConcurVector v) {
 		Operacion op = Operacion.Sub;
 		this.aplicarOpConThread(op,v, 0, null);
 	}
-	public void mul(ConcurVector v) {
+	public synchronized void mul(ConcurVector v) {
 		Operacion op = Operacion.Mul;
 		this.aplicarOpConThread(op, v,0, null);
 	}
-	public void div(ConcurVector v) {
+	public synchronized void div(ConcurVector v) {
 		Operacion op = Operacion.Div;
 		this.aplicarOpConThread(op, v,0, null);
 	}
 	
-	public double sum() {
+	public synchronized double sum() {
 		return 2 ; //falta
 	}
 	
-	public double prod(ConcurVector v) {
-		ConcurVectorT aux = new ConcurVectorT(dimension(),threads,load);//mientras las ops sean concurrentes es concurrente
+	public synchronized double prod(ConcurVector v) {
+		ConcurVectorT aux = new ConcurVectorT(dimension(),threads,load);
 		aux.assign(vector);
 		aux.mul(v);
 		return aux.sum();
 	}
 	
-	public double norm() {
-		//no estoy seguro si es concurrente,deberia porque lo instancio como un concurVEctorT
+	public synchronized double norm() {
 		ConcurVectorT aux = new ConcurVectorT(dimension(),threads,load);
 		aux.assign(vector);
 		aux.mul(vector);
 		return Math.sqrt(aux.sum());
 	}
 		
-	public void normalize() {
-		ConcurVector aux = new ConcurVector(dimension()); //esto es concurrente(creo)
+	public synchronized void normalize() {
+		ConcurVector aux = new ConcurVector(dimension());
 		aux.set(norm());
 		div(aux);
 	}
 	
-	public void max(ConcurVector v) {
+	public synchronized void max(ConcurVector v) {
 		Operacion op = Operacion.Max;
 		this.aplicarOpConThread(op, v, 0, null);
 	}
 	
-	public void min(ConcurVector v) {
+	public synchronized void min(ConcurVector v) {
 		Operacion op = Operacion.Min;
 		this.aplicarOpConThread(op, v, 0, null);
 	}
 	
-	public List<Integer> calcularDivisionDeSubtareas()
+	public  List<Integer> calcularDivisionDeSubtareas()
 	{
 		int cantElem = this.dimension();
 		int cantThread = this.threads;
