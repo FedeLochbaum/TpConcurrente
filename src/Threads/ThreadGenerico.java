@@ -1,6 +1,7 @@
 package Threads;
 
 import ConcurVectors.ConcurVector;
+import ConcurVectors.ConcurVectorT;
 
 public class ThreadGenerico extends Thread{
 	
@@ -11,8 +12,9 @@ public class ThreadGenerico extends Thread{
 	private ConcurVector vector2;
 	private double element;
 	private ConcurVector mask;
+	private ConcurVectorT concurVectorT;
 	
-	public ThreadGenerico(int inicio,int fin,ConcurVector vector1,Operacion opEnum,ConcurVector vector2,double element,ConcurVector mask)
+	public ThreadGenerico(int inicio,int fin,ConcurVector vector1,Operacion opEnum,ConcurVector vector2,double element,ConcurVector mask,ConcurVectorT vt)
 	{
 		this.inicio = inicio ;
 		this.fin = fin;
@@ -21,11 +23,9 @@ public class ThreadGenerico extends Thread{
 		this.vector2 = vector2;
 		this.element = element;
 		this.mask = mask;
+		this.concurVectorT = vt;
 	}
 	
-
-	
-
     public void run() {
 		switch(opEnum){
 		//aca tambien repito codigo, hay que mejorarlo..
@@ -35,6 +35,7 @@ public class ThreadGenerico extends Thread{
 					vector1.set(inicio,e);
 					this.inicio++;
 					}
+				concurVectorT.actualizar();
 				break;	
 			case Add :
 				while (inicio < fin){
@@ -42,13 +43,17 @@ public class ThreadGenerico extends Thread{
 					double elementv2 = vector2.get(inicio);
 					vector1.set(inicio,elementv1+elementv2);
 					this.inicio++;
-			}
+				}
+				concurVectorT.actualizar();
+				break;
 			case Assing :
 				while (inicio < fin){
 					double elem = vector2.get(inicio);
 					vector1.set(inicio,elem);
 					this.inicio++;
-				}	
+				}
+				concurVectorT.actualizar();
+				break;
 			case AssingWithMask :
 				while (inicio < fin){
 					double elem = vector2.get(inicio);
@@ -59,25 +64,32 @@ public class ThreadGenerico extends Thread{
 					}	
 					this.inicio++;
 				}
+				concurVectorT.actualizar();
+				break;
 			case Div :
 				while (inicio < fin){
 					double elementv1 = vector1.get(inicio);
 					double elementv2 = vector2.get(inicio);
 					vector1.set(inicio,elementv1/elementv2);
 					this.inicio++;
-			}
+				}
+				concurVectorT.actualizar();
+				break;
 			case Mul :
 				while (inicio < fin){
 					double elementv1 = vector1.get(inicio);
 					double elementv2 = vector2.get(inicio);
 					vector1.set(inicio,elementv1*elementv2);
 					this.inicio++;
-			}	
+				}
+				concurVectorT.actualizar();
+				break;
 			case Set :
 				while (inicio < fin){
 					vector1.set(inicio,element);
 					this.inicio++;
 				}
+				concurVectorT.actualizar();
 				break;
 			case Sub :
 				while (inicio < fin){
@@ -85,19 +97,22 @@ public class ThreadGenerico extends Thread{
 					double elementv2 = vector2.get(inicio);
 					vector1.set(inicio,elementv1-elementv2);
 					this.inicio++;
-			}
-			break;
+				}
+				concurVectorT.actualizar();
+				break;
 			case Max :
 				while (inicio < fin){
 					vector1.set(inicio, Math.max(vector1.get(inicio), vector2.get(inicio)));
 					this.inicio++;
 				}
+				concurVectorT.actualizar();
 				break;
 			case Min :
 				while (inicio < fin){
 					vector1.set(inicio, Math.min(vector1.get(inicio), vector2.get(inicio)));
 					this.inicio++;
 				}
+				concurVectorT.actualizar();
 				break;
 		}
 	}

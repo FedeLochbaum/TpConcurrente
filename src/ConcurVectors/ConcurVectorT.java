@@ -11,13 +11,14 @@ public class ConcurVectorT {
 	private int threads;
 	private int load;
 	private ConcurVector vector;
-	
+	private int cantidadDeThreadFinalizado;
 	
 	public ConcurVectorT(int dimension,int threads,int load)
 	{
 		this.threads = threads;
 		this.load = load;
 		this.vector = new ConcurVector(dimension);
+		this.cantidadDeThreadFinalizado = 0;
 	}
 
 	public int dimension() { return vector.dimension();}
@@ -33,14 +34,18 @@ public class ConcurVectorT {
 		for (int i : list)
 		{
 			int fin = inicio + i;
-			ThreadGenerico thread = new ThreadGenerico(inicio,fin,this.vector,opEnum,vector2,setElem,mask);
+			ThreadGenerico thread = new ThreadGenerico(inicio,fin,this.vector,opEnum,vector2,setElem,mask,this);
 			thread.start();
-			//inicio = i;
 			inicio=fin;
 		}
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 	}
 	//para no tener que castear el double, cuando no se usa.. en ves de null se pone 0 .
-	public synchronized void set(double d) {
+	public synchronized void set(double d){
 		Operacion op = Operacion.Set;
 		this.aplicarOpConThread(op,null, d, null);
 	}
@@ -124,21 +129,16 @@ public class ConcurVectorT {
 			resultado.add(promedio);
 			}
 		}
-		
-		
-		/*if (resto > this.load)
-			resultado.add(resto);
-		else{
-			//resultado.add(promedio);
-			if(resto <= cantThread)
-			{
-				for(int i=0; i!=resto; i++){
-					resultado.add(resultado.get(i)+1);
-				}
-			}
-			//nose.. si se puede llegar a esto(else)
-		}*/
 		return resultado;	
+	}
+
+	public synchronized void actualizar() {
+		cantidadDeThreadFinalizado++;
+		if(cantidadDeThreadFinalizado == threads)
+		{
+			notify();
+			cantidadDeThreadFinalizado = 0;
+		}
 	}
 	
 }
