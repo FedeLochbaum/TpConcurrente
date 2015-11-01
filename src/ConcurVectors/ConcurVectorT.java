@@ -21,7 +21,7 @@ public class ConcurVectorT {
 		this.load = load;
 		this.vector = new ConcurVector(dimension);
 		this.cantidadDeThreadFinalizado = 0;
-		mutex=new MutexMediador();
+		this.mutex=new MutexMediador();
 		
 	}
 
@@ -133,7 +133,7 @@ public class ConcurVectorT {
 		return resultado;	
 	}
 
-	public synchronized void actualizar() {
+	public void actualizar() {//le saque este synchronized y anda.. pero no entiedo porque.
 		cantidadDeThreadFinalizado++;
 		if(cantidadDeThreadFinalizado == threads)
 		{

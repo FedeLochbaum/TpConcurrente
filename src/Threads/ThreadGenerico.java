@@ -104,6 +104,14 @@ public class ThreadGenerico extends Thread{
 					this.inicio++;
 				}
 				break;
+			case Sum :
+				double res = 0;
+				while (inicio < fin){
+					res = res + vector1.get(inicio); //aca falta todo.. solo esta planteada la base
+					this.inicio++;
+					}
+				//aca hay que setear el res en algun vector auxiliar
+				break;	
 		}
 		concurVectorT.actualizar();
 	}
