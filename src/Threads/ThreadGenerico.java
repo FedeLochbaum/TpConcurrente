@@ -110,7 +110,7 @@ public class ThreadGenerico extends Thread{
 					res = res + vector1.get(inicio); //aca falta todo.. solo esta planteada la base
 					this.inicio++;
 					}
-				//aca hay que setear el res en algun vector auxiliar
+				concurVectorT.AddAux(res);
 				break;	
 		}
 		concurVectorT.actualizar();

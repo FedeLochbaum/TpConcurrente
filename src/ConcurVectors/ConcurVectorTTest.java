@@ -190,7 +190,7 @@ public void divTest()
 	assertEquals(pos5,Double.valueOf(-0.1));
 
 }
-/*
+
 @Test
 public void sumTest()
 {
@@ -200,7 +200,7 @@ public void sumTest()
 	
 	assertTrue(esperado == aEvaluar);
 }
-
+/*
 @Test
 public void prodTest()
 {

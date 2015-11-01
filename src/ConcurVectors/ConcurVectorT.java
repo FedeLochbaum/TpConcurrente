@@ -14,6 +14,7 @@ public class ConcurVectorT {
 	private ConcurVector vector;
 	private int cantidadDeThreadFinalizado;
 	private MutexMediador mutex;
+	private ConcurVectorT vectorAux;
 	
 	public ConcurVectorT(int dimension,int threads,int load)
 	{
@@ -22,6 +23,7 @@ public class ConcurVectorT {
 		this.vector = new ConcurVector(dimension);
 		this.cantidadDeThreadFinalizado = 0;
 		this.mutex=new MutexMediador();
+		this.vectorAux = this;
 		
 	}
 
@@ -34,6 +36,7 @@ public class ConcurVectorT {
 	
 	public void aplicarOpConThread(Operacion opEnum,ConcurVector vector2,double setElem,ConcurVector mask){
 		List<Integer> list = this.calcularDivisionDeSubtareas();
+		vectorAux = new ConcurVectorT(list.size(),threads,load);
 		int inicio = 0;
 		for (int i : list)
 		{
@@ -80,7 +83,20 @@ public class ConcurVectorT {
 	}
 	
 	public synchronized double sum() {
-		return 2 ; //falta
+		double resultado  = 0;
+		Operacion op = Operacion.Sum;
+		if(vectorAux.dimension()==1)
+			resultado = vectorAux.get(0);
+		else 
+		{
+			this.aplicarOpConThread(op, null,0, null);
+			if(vectorAux.dimension() == 2)
+				resultado = vectorAux.get(0) + vectorAux.get(1);
+			else
+				resultado = vectorAux.sum();
+		}
+		
+		return resultado ; 
 	}
 	
 	public synchronized double prod(ConcurVector v) {
@@ -140,6 +156,10 @@ public class ConcurVectorT {
 			mutex.releaseCondition();
 			cantidadDeThreadFinalizado = 0;
 		}
+	}
+
+	public  void AddAux(double res) { //aca saque el synchronized
+		vectorAux.set(res);
 	}
 	
 }
