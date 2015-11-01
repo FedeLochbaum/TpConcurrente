@@ -2,6 +2,7 @@ package ConcurVectors;
 import java.util.ArrayList;
 import java.util.List;
 
+import Threads.MutexMediador;
 import Threads.Operacion;
 import Threads.ThreadGenerico;
 
@@ -12,6 +13,7 @@ public class ConcurVectorT {
 	private int load;
 	private ConcurVector vector;
 	private int cantidadDeThreadFinalizado;
+	private MutexMediador mutex;
 	
 	public ConcurVectorT(int dimension,int threads,int load)
 	{
@@ -19,6 +21,7 @@ public class ConcurVectorT {
 		this.load = load;
 		this.vector = new ConcurVector(dimension);
 		this.cantidadDeThreadFinalizado = 0;
+		mutex=new MutexMediador();
 		
 	}
 
@@ -39,11 +42,8 @@ public class ConcurVectorT {
 			thread.start();
 			inicio=fin;
 		}
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		mutex.waitForCondition();
+			
 	}
 	//para no tener que castear el double, cuando no se usa.. en ves de null se pone 0 .
 	public synchronized void set(double d){
@@ -137,7 +137,7 @@ public class ConcurVectorT {
 		cantidadDeThreadFinalizado++;
 		if(cantidadDeThreadFinalizado == threads)
 		{
-			notify();
+			mutex.releaseCondition();
 			cantidadDeThreadFinalizado = 0;
 		}
 	}
