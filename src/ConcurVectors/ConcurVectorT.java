@@ -13,6 +13,7 @@ public class ConcurVectorT {
 	private int load;
 	private ConcurVector vector;
 	private int cantidadDeThreadFinalizado;
+	private int cantidadDeThreadAsignado;
 	private MutexMediador mutex;
 	private ConcurVectorT vectorAux;
 	
@@ -23,7 +24,6 @@ public class ConcurVectorT {
 		this.vector = new ConcurVector(dimension);
 		this.cantidadDeThreadFinalizado = 0;
 		this.mutex=new MutexMediador();
-		this.vectorAux = this;
 		
 	}
 
@@ -37,6 +37,7 @@ public class ConcurVectorT {
 	public void aplicarOpConThread(Operacion opEnum,ConcurVector vector2,double setElem,ConcurVector mask){
 		List<Integer> list = this.calcularDivisionDeSubtareas();
 		vectorAux = new ConcurVectorT(list.size(),threads,load);
+		cantidadDeThreadAsignado = list.size();
 		int inicio = 0;
 		for (int i : list)
 		{
@@ -83,20 +84,21 @@ public class ConcurVectorT {
 	}
 	
 	public synchronized double sum() {
-		double resultado  = 0;
-		Operacion op = Operacion.Sum;
-		if(vectorAux.dimension()==1)
-			resultado = vectorAux.get(0);
-		else 
-		{
-			this.aplicarOpConThread(op, null,0, null);
-			if(vectorAux.dimension() == 2)
-				resultado = vectorAux.get(0) + vectorAux.get(1);
-			else
-				resultado = vectorAux.sum();
-		}
-		
-		return resultado ; 
+		vectorAux = new ConcurVectorT(dimension(),threads,load);
+        double resultado  = 0;
+        Operacion op = Operacion.Sum;
+        if(this.dimension()==1)
+            resultado = vectorAux.get(0);
+        else 
+        {
+            this.aplicarOpConThread(op, null,0, null);
+            if(this.dimension() == 2)
+                resultado = vectorAux.get(0) + vectorAux.get(1);
+            else
+                resultado = vectorAux.sum();
+        }
+        
+        return resultado ; 
 	}
 	
 	public synchronized double prod(ConcurVector v) {
@@ -149,17 +151,23 @@ public class ConcurVectorT {
 		return resultado;	
 	}
 
-	public void actualizar() {//le saque este synchronized y anda.. pero no entiedo porque.
+	public  void actualizar() {//le saque este synchronized y anda.. pero no entiedo porque.
 		cantidadDeThreadFinalizado++;
-		if(cantidadDeThreadFinalizado == threads)
+		if(cantidadDeThreadFinalizado == cantidadDeThreadAsignado)
 		{
 			mutex.releaseCondition();
 			cantidadDeThreadFinalizado = 0;
 		}
 	}
 
-	public  void AddAux(double res) { //aca saque el synchronized
-		vectorAux.set(res);
+	public  void AddAux(double res) {
+		//vectorAux.set(res);
+		for(int i=0;i<vectorAux.dimension();i++){
+            if(vectorAux.get(i)==0){
+                vectorAux.set(i,res);
+                break;
+            }
+        }
 	}
 	
 }

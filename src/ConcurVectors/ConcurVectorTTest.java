@@ -200,7 +200,7 @@ public void sumTest()
 	
 	assertTrue(esperado == aEvaluar);
 }
-/*
+
 @Test
 public void prodTest()
 {
@@ -240,7 +240,7 @@ public void normalizeTest()
 	assertTrue(pos4 == 0.988634249194571);
 	assertTrue(pos5 == -0.024715856229864275);
 }
-*/
+
 @Test
 public void maxTest()
 {
