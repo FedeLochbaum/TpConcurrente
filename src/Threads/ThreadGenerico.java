@@ -107,7 +107,7 @@ public class ThreadGenerico extends Thread{
 			case Sum :
 				double res = 0;
 				while (inicio < fin){
-					res = res + vector1.get(inicio); //aca falta todo.. solo esta planteada la base
+					res = res + vector1.get(inicio); 
 					this.inicio++;
 					}
 				concurVectorT.AddAux(res);

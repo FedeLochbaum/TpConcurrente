@@ -151,7 +151,7 @@ public class ConcurVectorT {
 		return resultado;	
 	}
 
-	public  void actualizar() {//le saque este synchronized y anda.. pero no entiedo porque.
+	public  void actualizar() {
 		cantidadDeThreadFinalizado++;
 		if(cantidadDeThreadFinalizado == cantidadDeThreadAsignado)
 		{
@@ -161,7 +161,6 @@ public class ConcurVectorT {
 	}
 
 	public  void AddAux(double res) {
-		//vectorAux.set(res);
 		for(int i=0;i<vectorAux.dimension();i++){
             if(vectorAux.get(i)==0){
                 vectorAux.set(i,res);
