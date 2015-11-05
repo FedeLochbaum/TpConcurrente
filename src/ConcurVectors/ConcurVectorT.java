@@ -27,11 +27,11 @@ public class ConcurVectorT {
 		
 	}
 
-	public int dimension() { return vector.dimension();}
+	public synchronized int dimension() { return vector.dimension();}
 
-	public double get(int i) { return vector.get(i);}
+	public synchronized double get(int i) { return vector.get(i);}
 
-	public void set(int i, double d) { vector.set(i,d);}
+	public synchronized void set(int i, double d) { vector.set(i,d);}
 	
 	
 	public void aplicarOpConThread(Operacion opEnum,ConcurVector vector2,double setElem,ConcurVector mask){
@@ -41,8 +41,9 @@ public class ConcurVectorT {
 		int inicio = 0;
 		for (int i : list)
 		{
+			int indice = list.indexOf(i); 
 			int fin = inicio + i;
-			ThreadGenerico thread = new ThreadGenerico(inicio,fin,this.vector,opEnum,vector2,setElem,mask,this);
+			ThreadGenerico thread = new ThreadGenerico(inicio,fin,this.vector,opEnum,vector2,setElem,mask,this,indice);
 			thread.start();
 			inicio=fin;
 		}
@@ -92,7 +93,7 @@ public class ConcurVectorT {
         else 
         {
             this.aplicarOpConThread(op, null,0, null);
-            if(this.dimension() == 2)
+            if(vectorAux.dimension() == 2)
                 resultado = vectorAux.get(0) + vectorAux.get(1);
             else
                 resultado = vectorAux.sum();
@@ -160,13 +161,10 @@ public class ConcurVectorT {
 		}
 	}
 
-	public  void AddAux(double res) {
-		for(int i=0;i<vectorAux.dimension();i++){
-            if(vectorAux.get(i)==0){
-                vectorAux.set(i,res);
-                break;
-            }
-        }
+	public void AddAux(double res,int indice) {
+			vectorAux.set(indice, res);
+			
+        	
 	}
 	
 }

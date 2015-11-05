@@ -13,8 +13,9 @@ public class ThreadGenerico extends Thread{
 	private double element;
 	private ConcurVector mask;
 	private ConcurVectorT concurVectorT;
+	private int indice;
 	
-	public ThreadGenerico(int inicio,int fin,ConcurVector vector1,Operacion opEnum,ConcurVector vector2,double element,ConcurVector mask,ConcurVectorT vt)
+	public ThreadGenerico(int inicio,int fin,ConcurVector vector1,Operacion opEnum,ConcurVector vector2,double element,ConcurVector mask,ConcurVectorT vt,int indice)
 	{
 		this.inicio = inicio ;
 		this.fin = fin;
@@ -24,6 +25,7 @@ public class ThreadGenerico extends Thread{
 		this.element = element;
 		this.mask = mask;
 		this.concurVectorT = vt;
+		this.indice = indice;
 	}
 	
     public void run() {
@@ -110,7 +112,7 @@ public class ThreadGenerico extends Thread{
 					res = res + vector1.get(inicio); 
 					this.inicio++;
 					}
-				concurVectorT.AddAux(res);
+				concurVectorT.AddAux(res,indice);
 				break;	
 		}
 		concurVectorT.actualizar();
